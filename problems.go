@@ -43,7 +43,8 @@ func problem22() {
 		names = append(names, name...)
 	}
 
-	sort.Slice(names, func(i, j int) bool { return names[i] < names[j] })
+	//sort.Slice(names, func(i, j int) bool { return names[i] < names[j] })
+	sort.Strings(names)
 
 	var numVal []int
 	for i, name := range names {
