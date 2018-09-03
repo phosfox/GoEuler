@@ -13,7 +13,11 @@ import (
 )
 
 func main() {
-	problem22()
+	problem23()
+
+}
+
+func problem23() {
 
 }
 
