@@ -18,13 +18,39 @@ func main() {
 }
 
 func problem23() {
-	/* A perfect number is a number for which the sum of its proper divisors is exactly equal to the number. For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
-	   A number n is called deficient if the sum of its proper divisors is less than n and it is called abundant if this sum exceeds n.
-	   As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written as the sum of two abundant numbers is 24. By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers. However, this upper limit cannot be reduced any further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
-	   Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers. */
-	fmt.Println(IsAbundand(100))
+	/*
+		A perfect number is a number for which the sum of its proper divisors is exactly equal to the number. For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
+		A number n is called deficient if the sum of its proper divisors is less than n and it is called abundant if this sum exceeds n.
+		As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written as the sum of two abundant numbers is 24. By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers. However, this upper limit cannot be reduced any further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
+		Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers. */
+	MAX := 28123
+	abundandNumbers := []int{}
+	result := [28124]bool{false}
+	for i := 12; i < 28123; i++ {
+		if IsAbundand(i) {
+			abundandNumbers = append(abundandNumbers, i)
+		}
+	}
+
+	for i := 0; i < len(abundandNumbers); i++ {
+		for j := 0; j < len(abundandNumbers); j++ {
+			sum := abundandNumbers[i] + abundandNumbers[j]
+			if sum > MAX {
+				break
+			}
+			result[sum] = true
+		}
+	}
+	sumOfResult := 0
+	for i, v := range result {
+		if !v {
+			sumOfResult += i
+		}
+	}
+	fmt.Println(sumOfResult)
 }
 
+//IsAbundand returns true if the number is abundand
 func IsAbundand(n int) bool {
 	divs := getDivisors(n)
 	sum := sumSlice(&divs)
