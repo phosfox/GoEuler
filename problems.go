@@ -23,6 +23,7 @@ func problem24() {
 									012   021   102   120   201   210
 		What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 	*/
+	// https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
 	array := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	for i := 1; i <= 10; i++ {
 		fmt.Println(array)
